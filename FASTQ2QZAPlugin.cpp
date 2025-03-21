@@ -23,14 +23,15 @@ void FASTQ2QZAPlugin::output(std::string file) {
    command += "export PATH=${CONDA_HOME}/bin/:${PATH}; ";
    command += "eval \"$(conda shell.bash hook)\"; ";
    command += "conda activate qiime2-2021.4; ";
-   command += "qiime tools import --type \'SampleData[PairedEndSequencesWithQuality]\' --input-path "+std::string(PluginManager::prefix())+"/"+parameters["manifest"]+" --output-path "+file+" --input-format "+parameters["format"]+"; ";
+   //command += "qiime tools import --type \'SampleData[PairedEndSequencesWithQuality]\' --input-path "+std::string(PluginManager::prefix())+"/"+parameters["manifest"]+" --output-path "+file+" --input-format "+parameters["format"]+"; ";
+   command += "qiime tools import --type \'SampleData[SequencesWithQuality]\' --input-path "+std::string(PluginManager::prefix())+"/"+parameters["manifest"]+" --output-path "+file+" --input-format "+parameters["format"]+"; ";
 
 //qiime tools import \
   --type 'SampleData[PairedEndSequencesWithQuality]' \
   --input-path AlphaFinal1.manifest \
   --output-path AlphaFinal1-paired-end-demux.qza \
   --input-format PairedEndFastqManifestPhred33V2
- //std::cout << command << std::endl;
+ std::cout << command << std::endl;
    command += "conda deactivate; ";
    command += "conda deactivate; ";
    command += "export PATH=${OLDPATH}";
